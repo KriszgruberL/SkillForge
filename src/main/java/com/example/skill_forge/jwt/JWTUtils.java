@@ -10,6 +10,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 import java.time.Instant;
@@ -28,6 +29,8 @@ public abstract class JWTUtils {
                                 .stream()
                                 .map(GrantedAuthority::getAuthority)
                                 .toList()
+
+                        //todo change this shit
                 )
                 .sign( Algorithm.HMAC512( "s3cr3t" ) );
     }

@@ -1,6 +1,7 @@
 package com.example.skill_forge.controller;
 
 
+import com.example.skill_forge.jwt.JWTUtils;
 import com.example.skill_forge.models.dtos.AuthDTO;
 import com.example.skill_forge.models.entity.User;
 import com.example.skill_forge.models.forms.LoginForm;
@@ -19,32 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
+//    http://localhost:8080/swagger-ui/index.html#/auth-controller
+
     private final UserService userService;
     private final UserDetailsService userDetailsService;
 
-//    private final GamerService gamerService;
-//
-//    private final JwtUtil jwtUtil;
-
     public AuthController(
             UserService userService,
-
             UserDetailsService userDetailsService) {
         this.userService = userService;
-//        this.gamerService = gamerService;
-//        this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> register(@RequestBody @Valid RegisterForm form){
-//        User user= form.toEntity();
-//        userService.register( user );
-//
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .build();
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterForm form){
+        User user= form.toEntity();
+        userService.register( user );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .build();
+    }
 
     @PostMapping("/login")
     public  ResponseEntity<AuthDTO> login (@RequestBody @Valid LoginForm form){
@@ -53,7 +49,5 @@ public class AuthController {
         User user = (User) userDetailsService.loadUserByUsername( form.getUsername() );
 
         return ResponseEntity.ok( AuthDTO.toDTO( token, user ) );
-
-
     }
 }
