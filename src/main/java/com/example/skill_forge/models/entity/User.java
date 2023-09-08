@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "user_enabled", nullable = false)
-    private boolean enabled;
+    private boolean enabled = true;
 
     @Column(name = "user_objectives")
     @OneToMany(mappedBy = "user")
