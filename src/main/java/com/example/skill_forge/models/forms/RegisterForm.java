@@ -1,11 +1,16 @@
 package com.example.skill_forge.models.forms;
 
 import com.example.skill_forge.models.entity.User;
+import com.example.skill_forge.models.entity.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class RegisterForm {
@@ -27,7 +32,6 @@ public class RegisterForm {
         entity.setUsername(username);
         entity.setEmail(email);
         entity.setPassword(password);
-
         return entity;
     }
 }

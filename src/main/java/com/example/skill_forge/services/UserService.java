@@ -6,4 +6,6 @@ public interface UserService {
 
     void register(User user);
     String login (String username, String password);
+    void delete(Long id);
+    User getOne(Long id);
 }

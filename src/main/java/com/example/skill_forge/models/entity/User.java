@@ -43,8 +43,12 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Session> sessions;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @ElementCollection
+    @CollectionTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id") // Spécifiez ici le nom de la colonne faisant référence à la clé primaire de l'entité parente
+    )
     private Set<Role> roles;
 
     @Override
