@@ -1,6 +1,7 @@
 package com.example.skill_forge.controller;
 
 import com.example.skill_forge.models.dtos.InstitutionDTO;
+import com.example.skill_forge.models.entity.Address;
 import com.example.skill_forge.models.entity.Institution;
 import com.example.skill_forge.models.forms.InstitutionForm;
 import com.example.skill_forge.services.InstitutionService;

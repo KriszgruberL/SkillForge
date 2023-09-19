@@ -1,6 +1,8 @@
 package com.example.skill_forge.services.impl;
 
+import com.example.skill_forge.models.entity.Address;
 import com.example.skill_forge.models.entity.Institution;
+import com.example.skill_forge.repositories.AddressRepository;
 import com.example.skill_forge.repositories.InstitutionRepository;
 import com.example.skill_forge.services.InstitutionService;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.List;
 public class InstitutionServiceImpl implements InstitutionService {
 
     private final InstitutionRepository institutionRepository;
+    private final AddressRepository addressRepository;
 
-    public InstitutionServiceImpl(InstitutionRepository institutionRepository) {
+    public InstitutionServiceImpl(InstitutionRepository institutionRepository, AddressRepository addressRepository) {
         this.institutionRepository = institutionRepository;
+        this.addressRepository = addressRepository;
     }
 
 
@@ -51,7 +55,10 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public void delete(Long id) {
+        Address address = getOne(id).getAddress();
+
         institutionRepository.delete(getOne(id));
+        addressRepository.delete(address);
 
     }
 }
