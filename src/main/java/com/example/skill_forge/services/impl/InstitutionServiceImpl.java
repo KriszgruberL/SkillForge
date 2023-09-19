@@ -48,10 +48,19 @@ public class InstitutionServiceImpl implements InstitutionService {
         Institution entity = getOne(id);
 
         entity.setName(update.getName());
-        entity.setAddress(update.getAddress());
+
+        if (!entity.getAddress().equals(update.getAddress())) {
+            entity.setAddress(update.getAddress());
+        }
 
         return institutionRepository.save(entity);
+
+//        update.setId(id);
+//        update.setAddress(entity.getAddress());
+//
+//        return institutionRepository.save(update);
     }
+
 
     @Override
     public void delete(Long id) {

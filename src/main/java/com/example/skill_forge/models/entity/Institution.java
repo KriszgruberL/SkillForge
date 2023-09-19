@@ -18,7 +18,7 @@ public class Institution {
     @Column(name = "institution_name", nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Address address;
 
     @OneToMany(mappedBy = "institutionId", cascade = CascadeType.ALL)

@@ -71,7 +71,7 @@ public class InstitutionController {
     @ApiResponse(
             description = "Update un établissement "
     )
-    @PutMapping("/{id:[0-9]+}")
+    @PatchMapping("/{id:[0-9]+}")
     public ResponseEntity<InstitutionDTO> updateInstitution(@PathVariable long id, @RequestBody @Valid InstitutionForm form) {
 
         Institution institution = institutionService.update(id, form.toEntity());
