@@ -17,10 +17,10 @@ public class Session {
     private Long id;
 
     @Column(name = "session_start_time", nullable = false)
-    private LocalTime start_time;
+    private LocalTime startTime;
 
     @Column(name = "session_end_time", nullable = false)
-    private LocalTime end_time;
+    private LocalTime endTime;
 
     @ManyToOne
     @JoinColumn(name = "session_user_id", nullable = false)
@@ -28,10 +28,10 @@ public class Session {
 
     @ManyToOne
     @JoinColumn(name = "session_course_id")
-    private Course course_id;
+    private Course courseId;
 
     @ManyToOne
     @JoinColumn(name = "session_online_course_id")
-    private OnlineCourse online_course_id;
+    private OnlineCourse onlineCourseId;
 
 }

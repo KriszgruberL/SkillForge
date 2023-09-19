@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,25 +22,25 @@ public class Course {
     private String name;
 
     @Column(name = "course_ue_code")
-    private String ue_code;
+    private String ueCode;
 
     @Column(name = "course_start_date", nullable = false)
-    private LocalDate start_date;
+    private LocalDate startDate;
 
     @Column(name = "course_end_date", nullable = false)
-    private LocalDate end_date;
+    private LocalDate endDate;
 
     @Column(name = "course_teacher")
     private String teacher;
 
-    @OneToMany(mappedBy = "course_id")
+    @OneToMany(mappedBy = "courseId")
     private Set<Session> sessions;
 
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
     @ManyToOne
-    private Institution institution_id;
+    private Institution institutionId;
 
 
 }

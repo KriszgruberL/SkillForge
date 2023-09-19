@@ -18,10 +18,10 @@ public class Institution {
     @Column(name = "institution_name", nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Address address;
 
-    @OneToMany(mappedBy = "institution_id")
-    private Set<Course> courses_given;
+    @OneToMany(mappedBy = "institutionId", cascade = CascadeType.ALL)
+    private Set<Course> coursesGiven;
 
 }

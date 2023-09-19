@@ -30,7 +30,6 @@ public class UserDTO {
                         .stream()
                         .map(Enum::name)
                         .collect(Collectors.toSet()))
-
                 .build();
     }
 }

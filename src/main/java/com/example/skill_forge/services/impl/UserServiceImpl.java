@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
     public void register(User user) {
         Assert.notNull(user, "User should not be null");
 
-        if ( userRepository.existsByUsername( user.getUsername() ) ){
-            throw new RuntimeException("Username already exist");
+        if ( userRepository.existsByUsername( user.getUsername() ) || userRepository.existsByUsername( user.getEmail() ) ){
+            throw new RuntimeException("Username already exist or email already exist");
             //todo exception unique
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));

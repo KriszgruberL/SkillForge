@@ -27,7 +27,7 @@ public class OnlineCourse {
     @JoinColumn(name = "online_course_platform_id")
     private Platform platform;
 
-    @OneToMany(mappedBy = "online_course_id")
+    @OneToMany(mappedBy = "onlineCourseId")
     private Set<Session> sessions;
 
     @ManyToMany
