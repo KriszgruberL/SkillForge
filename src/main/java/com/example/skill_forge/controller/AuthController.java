@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/auth")
@@ -31,21 +34,23 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterForm form){
-        User user= form.toEntity();
-        userService.register( user );
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterForm form) {
+        User user = form.toEntity();
+        userService.register(user);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
+
+
     }
 
     @PostMapping("/login")
-    public  ResponseEntity<AuthDTO> login (@RequestBody @Valid LoginForm form){
+    public ResponseEntity<AuthDTO> login(@RequestBody @Valid LoginForm form) {
 
         String token = userService.login((form.getUsername()), form.getPassword());
-        User user = (User) userDetailsService.loadUserByUsername( form.getUsername() );
+        User user = (User) userDetailsService.loadUserByUsername(form.getUsername());
 
-        return ResponseEntity.ok( AuthDTO.toDTO( token, user ) );
+        return ResponseEntity.ok(AuthDTO.toDTO(token, user));
     }
 }

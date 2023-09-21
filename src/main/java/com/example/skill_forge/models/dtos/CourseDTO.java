@@ -19,6 +19,8 @@ public class CourseDTO {
     private LocalDate endDate;
     private String teacher;
     private Set<SessionDTO> sessions;
+    private Long institutionId;
+
 
     public static CourseDTO toDTO(Course entity){
         if(entity == null) {
@@ -37,6 +39,7 @@ public class CourseDTO {
                         .map(SessionDTO::toDTO)
                         .collect(Collectors.toSet())
                 )
+                .institutionId(entity.getInstitutionId().getId())
                 .build();
     }
 }

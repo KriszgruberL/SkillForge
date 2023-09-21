@@ -62,7 +62,6 @@ public class DataInitializer implements CommandLineRunner{
 //            address.setZipcode("4000");
 //            address.setCity("Ville");
 //            address.setCountry("Belgique");
-//            addressRepository.save(address);
 //
 //            Institution institution = new Institution();
 //            institution.setName("institution");
@@ -77,9 +76,17 @@ public class DataInitializer implements CommandLineRunner{
 //            course.setTeacher("Pouet pouet");
 //            course.setInstitutionId(institution);
 //            courseRepository.save(course);
-//
-//            institution.setCoursesGiven(Set.of(course));
-//
+////
+//            Course course2 = new Course();
+//            course.setName("ERP");
+//            course.setUeCode("2145242");
+//            course.setStartDate(LocalDate.now().minusDays(20));
+//            course.setEndDate(LocalDate.now());
+//            course.setTeacher("Potit blageur");
+//            course.setInstitutionId(institution);
+//            courseRepository.save(course2);
+
+
 
 
 

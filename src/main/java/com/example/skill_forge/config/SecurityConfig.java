@@ -45,11 +45,11 @@ public class SecurityConfig {
                     registery
                             .requestMatchers("/swagger/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                             .requestMatchers("/auth/login", "/auth/register").permitAll()
-                            .requestMatchers("**").permitAll()
-                            .requestMatchers(HttpMethod.HEAD).hasRole("ADMIN")
-                            .requestMatchers("/test/header").anonymous()
-                            .requestMatchers(HttpMethod.POST, "/studio/**").hasAuthority("ROLE_USER")
-                            .requestMatchers(request -> request.getParameterMap().size() > 5).authenticated();
+                            .requestMatchers("**").permitAll();
+//                            .requestMatchers(HttpMethod.HEAD).hasRole("ADMIN")
+//                            .requestMatchers("/test/header").anonymous()
+//                            .requestMatchers(HttpMethod.POST, "/studio/**").hasAuthority("ROLE_USER")
+//                            .requestMatchers(request -> request.getParameterMap().size() > 5).authenticated();
                     // todo security this is awful
                 });
 

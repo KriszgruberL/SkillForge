@@ -21,7 +21,7 @@ public class Institution {
     @OneToOne (cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Address address;
 
-    @OneToMany(mappedBy = "institutionId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "institutionId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Course> coursesGiven;
 
 }
