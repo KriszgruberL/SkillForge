@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
 
@@ -71,23 +72,11 @@ public class DataInitializer implements CommandLineRunner{
 //            Course course = new Course();
 //            course.setName("Algo");
 //            course.setUeCode("288954D2");
-//            course.setStartDate(LocalDate.now().minusDays(15));
-//            course.setEndDate(LocalDate.now());
+//            course.setStartDate(LocalDateTime.now().minusDays(15));
+//            course.setEndDate(LocalDateTime.now());
 //            course.setTeacher("Pouet pouet");
 //            course.setInstitutionId(institution);
 //            courseRepository.save(course);
-////
-//            Course course2 = new Course();
-//            course.setName("ERP");
-//            course.setUeCode("2145242");
-//            course.setStartDate(LocalDate.now().minusDays(20));
-//            course.setEndDate(LocalDate.now());
-//            course.setTeacher("Potit blageur");
-//            course.setInstitutionId(institution);
-//            courseRepository.save(course2);
-
-
-
 
 
         }

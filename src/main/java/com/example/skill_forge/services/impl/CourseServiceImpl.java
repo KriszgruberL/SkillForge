@@ -3,6 +3,7 @@ package com.example.skill_forge.services.impl;
 import com.example.skill_forge.models.entity.Course;
 import com.example.skill_forge.repositories.CourseRepository;
 import com.example.skill_forge.services.CourseService;
+import com.example.skill_forge.services.InstitutionService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,22 @@ public class CourseServiceImpl implements CourseService {
         this.courseRepository = courseRepository;
     }
 
+    private Course escapeSingleQuotesInCourse(Course course) {
+        // Escape single quotes in string fields of the Course entity
+        course.setName(escapeSingleQuotes(course.getName()));
+        course.setTeacher(escapeSingleQuotes(course.getTeacher()));
+        course.setProgram(escapeSingleQuotes(course.getProgram()));
+        course.setTerminalCapacities(escapeSingleQuotes(course.getTerminalCapacities()));
+
+        return course;
+    }
+
+    private String escapeSingleQuotes(String input) {
+        if (input != null) {
+            return input.replace("'", "\\'");
+        }
+        return input;
+    }
 
     @Override
     public Long add(Course entity) {
@@ -27,6 +44,7 @@ public class CourseServiceImpl implements CourseService {
             throw new RuntimeException("Already exist");
             // todo exception already exist
         }
+        entity = escapeSingleQuotesInCourse(entity);
         return courseRepository.save(entity).getId();
     }
 

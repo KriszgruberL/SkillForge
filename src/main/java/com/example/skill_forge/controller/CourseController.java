@@ -1,6 +1,7 @@
 package com.example.skill_forge.controller;
 
 import com.example.skill_forge.models.dtos.CourseDTO;
+import com.example.skill_forge.models.dtos.SmallCourseDTO;
 import com.example.skill_forge.models.entity.Course;
 import com.example.skill_forge.models.forms.CourseForm;
 import com.example.skill_forge.services.CourseService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RestController
 @RequestMapping("/course")
 public class CourseController {
@@ -27,15 +28,16 @@ public class CourseController {
             description = "Retourne tous les cours"
     )
     @GetMapping
-    public ResponseEntity<List<CourseDTO>> getAll() {
+    public ResponseEntity<List<SmallCourseDTO>> getAll() {
 
         return ResponseEntity.ok(
                 courseService.getAll()
                         .stream()
-                        .map(CourseDTO::toDTO)
+                        .map(SmallCourseDTO::toDTO)
                         .toList()
         );
     }
+
 
     @ApiResponse(
             description = "Retourne un cours dont l'id est passé en path variable"

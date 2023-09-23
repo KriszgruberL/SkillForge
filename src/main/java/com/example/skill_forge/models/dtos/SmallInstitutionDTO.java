@@ -9,26 +9,22 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
-public class InstitutionDTO {
+public class SmallInstitutionDTO {
 
     private Long id;
     private String name;
     private AddressDTO address;
-    private Set<SmallCourseDTO> coursesGiven;
 
-    public static InstitutionDTO toDTO(Institution entity){
+    public static SmallInstitutionDTO toDTO(Institution entity){
         if(entity == null) {
             return null;
         }
 
-        return InstitutionDTO.builder()
+        return SmallInstitutionDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .address(AddressDTO.toDTO(entity.getAddress()))
-                .coursesGiven(entity.getCoursesGiven()
-                        .stream()
-                        .map(SmallCourseDTO:: toDTO)
-                        .collect(Collectors.toSet()))
                 .build();
     }
+
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -29,6 +30,12 @@ public class Course {
 
     @Column(name = "course_end_date", nullable = false)
     private LocalDate endDate;
+
+    @Column(name = "course_program", length = 4000)
+    private String program;
+
+    @Column(name = "course_terminal_capacities", length = 1500)
+    private String terminalCapacities;
 
     @Column(name = "course_teacher")
     private String teacher;
