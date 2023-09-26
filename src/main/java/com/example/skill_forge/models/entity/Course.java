@@ -1,5 +1,7 @@
 package com.example.skill_forge.models.entity;
 
+import com.example.skill_forge.models.entity.enums.Result;
+import com.example.skill_forge.models.entity.enums.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +41,12 @@ public class Course {
 
     @Column(name = "course_teacher")
     private String teacher;
+
+    @Column (name = "course_result")
+    private Result result;
+
+    @Column (name = "course_status", nullable = false)
+    private Status status;
 
     @OneToMany(mappedBy = "courseId")
     private Set<Session> sessions;

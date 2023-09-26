@@ -1,27 +1,38 @@
 package com.example.skill_forge.controller;
 
 import com.example.skill_forge.models.dtos.CourseDTO;
+import com.example.skill_forge.models.dtos.ListSmallCourseDTO;
 import com.example.skill_forge.models.dtos.SmallCourseDTO;
 import com.example.skill_forge.models.entity.Course;
+import com.example.skill_forge.models.entity.User;
 import com.example.skill_forge.models.forms.CourseForm;
+import com.example.skill_forge.repositories.UserRepository;
 import com.example.skill_forge.services.CourseService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 //@CrossOrigin("*")
 @RestController
 @RequestMapping("/course")
 public class CourseController {
-    
-    private final CourseService courseService;
 
-    public CourseController(CourseService courseService) {
+    private final CourseService courseService;
+    private final UserRepository userRepository;
+
+    public CourseController(CourseService courseService,
+                            UserRepository userRepository) {
         this.courseService = courseService;
+        this.userRepository = userRepository;
     }
 
     @ApiResponse(
@@ -36,6 +47,31 @@ public class CourseController {
                         .map(SmallCourseDTO::toDTO)
                         .toList()
         );
+    }
+
+    @ApiResponse(
+            description = "Retourne tous les cours par l'utilisateur"
+    )
+    @GetMapping("/byUser")
+//    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<ListSmallCourseDTO> getAllByUser(Authentication authentication,
+                                                                 @RequestParam(defaultValue = "0", required = false) Integer page,
+                                                                 @RequestParam(defaultValue = "2", required = false) Integer size) {
+        if (authentication == null) {
+            // User is not authenticated, return 401 Unauthorized
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        User user = (User) authentication.getPrincipal();
+        ListSmallCourseDTO listSmallCourseDTO = ListSmallCourseDTO.builder()
+                .listCourse(courseService.getAllByUser(user, page, size)
+                        .stream()
+                        .map(SmallCourseDTO::toDTO)
+                        .toList())
+                .count(courseService.getCount(user))
+                .build();
+
+        return ResponseEntity.ok(listSmallCourseDTO);
     }
 
 

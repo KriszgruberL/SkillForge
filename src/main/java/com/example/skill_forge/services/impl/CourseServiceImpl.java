@@ -1,15 +1,18 @@
 package com.example.skill_forge.services.impl;
 
 import com.example.skill_forge.models.entity.Course;
+import com.example.skill_forge.models.entity.User;
 import com.example.skill_forge.repositories.CourseRepository;
 import com.example.skill_forge.services.CourseService;
 import com.example.skill_forge.services.InstitutionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CourseServiceImpl implements CourseService {
+class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
 
@@ -54,10 +57,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public Page<Course> getAllByUser(User user, Integer page, Integer size) {
+        return this.courseRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Long getCount(User user) {
+        return this.courseRepository.getCourseCount(user);
+    }
+
+    @Override
     public Course getOne(Long id) {
         return courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
         //todo notfound exception
     }
+
 
     @Override
     public Course update(Long id, Course update) {

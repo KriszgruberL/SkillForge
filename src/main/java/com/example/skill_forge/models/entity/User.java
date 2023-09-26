@@ -44,7 +44,7 @@ public class User implements UserDetails {
     private Set<Session> sessions;
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id") // Spécifiez ici le nom de la colonne faisant référence à la clé primaire de l'entité parente

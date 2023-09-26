@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "session")
@@ -21,6 +23,9 @@ public class Session {
 
     @Column(name = "session_end_time", nullable = false)
     private LocalTime endTime;
+
+    @Column(name = "session_days", nullable = false)
+    private Set<DayOfWeek> sessionsDays;
 
     @ManyToOne
     @JoinColumn(name = "session_user_id", nullable = false)

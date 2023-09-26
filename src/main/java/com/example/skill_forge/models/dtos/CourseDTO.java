@@ -1,6 +1,8 @@
 package com.example.skill_forge.models.dtos;
 
 import com.example.skill_forge.models.entity.Course;
+import com.example.skill_forge.models.entity.enums.Result;
+import com.example.skill_forge.models.entity.enums.Status;
 import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +19,8 @@ public class CourseDTO {
     private Long id;
     private String name;
     private String ueCode;
+    private Result result;
+    private Status status;
     private LocalDate startDate;
     private LocalDate endDate;
     private String teacher;
@@ -35,6 +39,8 @@ public class CourseDTO {
                 .id(entity.getId())
                 .name(entity.getName())
                 .ueCode(entity.getUeCode())
+                .result(entity.getResult())
+                .status(entity.getStatus())
                 .startDate(entity.getStartDate())
                 .endDate(entity.getEndDate())
                 .teacher(entity.getTeacher())

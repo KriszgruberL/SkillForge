@@ -1,5 +1,6 @@
 package com.example.skill_forge.services.impl;
 
+import com.example.skill_forge.models.entity.User;
 import com.example.skill_forge.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +18,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername( username )
-                .orElseThrow( () -> new UsernameNotFoundException("Username not found") );
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+        return user;
+
     }
 }
